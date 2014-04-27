@@ -1,7 +1,7 @@
 use strict; use warnings;
 
 use Test::More;
-use Test::DBIC::Calls;
+use Test::DBIx::Class::Stats;
 use lib 't/lib';
 
 use Test::DBIx::Class {

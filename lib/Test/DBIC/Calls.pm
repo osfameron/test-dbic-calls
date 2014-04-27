@@ -17,35 +17,48 @@ check your assumptions about prefetching, etc.
     use Test::More;
     use Test::DBIC::Calls;
 
-    # get a DBIC object, for example using Test::DBIx::Class
+    # if you are using Test::DBIx::Class or similar, we can get the 
+    # database handle from the `Schema` method
     use Test::DBIx::Class;
-    my $db = Schema;
 
-    with_stats 'test 1', $db, sub {
+    with_stats 'test 1', sub {
         my $stats = shift;
 
-        my $rs = $db->resultset('Foo')->search();
+        my $rs = Schema->resultset('Foo')->search();
         is $stats->call_count, 0, 'No calls on preparing RS';
 
         my @foo = $rs->all;
         is $stats->call_count, 1, '1 call after preparing RS';
     };
 
+    # alternatively, we can pass it in explicitly:
+    
+    my $db = Schema
+    with_stats 'test 2', $db, sub {
+        ...
+    };
+
 =head1 EXPORTED FUNCTIONS
 
 =over 4
 
-=item C<with_stats $name, $db, $code>
+=item C<with_stats $name, [$db], $code>
 
 The L<Test::DBIC::Profiler> object is created for the database and is passed to
 your code reference as its first and only argument.
+
+If C<$db> is not passed, the caller's C<Schema> function will be called.  This
+is designed to work with L<Test::DBIx::Class>.
 
 =back
 
 =cut
 
 sub with_stats {
-    my ($name, $db, $subtest) = @_;
+    my ($name, @args) = @_;
+
+    my $subtest = pop @args;
+    my $db = @args ? shift @args : caller->Schema;
 
     my $storage = $db->storage;
     my %old = (

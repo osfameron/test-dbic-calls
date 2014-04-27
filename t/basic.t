@@ -8,19 +8,19 @@ use Test::DBIx::Class {
     schema_class => 'TestDB::Schema',
 };
 
-my $db = Schema;
-
-with_stats 'test 1', $db, sub {
+with_stats 'test with inferred Schema', sub {
     my $stats = shift;
 
-    my $rs = $db->resultset('Foo')->search();
+    my $rs = Schema->resultset('Foo')->search();
     is $stats->call_count, 0, 'No calls on preparing RS';
 
     my @foo = $rs->all;
     is $stats->call_count, 1, '1 call after preparing RS';
 };
 
-with_stats 'test 2', $db, sub {
+my $db = Schema;
+
+with_stats 'test with explicit schema passing', $db, sub {
     my $stats = shift;
 
     my $rs = $db->resultset('Foo');

@@ -75,9 +75,11 @@ sub with_stats {
     $storage->debugobj( $old{debugobj} );
 }
 
-# I couldn't figure out how to do a subtest wrapper without all this, cargo
-# culted from TB->subtest.  Is there a better way?  Or worth contributing this
-# back to TB?
+# this is cargo-culted from TB->subtest.
+# if https://github.com/Test-More/test-more/pull/395 is accepted
+# this routine can be deleted, and `with_stats` can just call
+# Test::Builder->new->subtest( "With stats: $name", $subtest, $stats );
+#
 sub subtest_with {
     my ($name, $subtest, @args) = @_;
     my $tb = __PACKAGE__->builder;

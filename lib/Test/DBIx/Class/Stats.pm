@@ -1,21 +1,21 @@
 package Test::DBIx::Class::Stats;
 use parent 'Test::Builder::Module';
-use Test::DBIx::Class::Profiler;
+use Test::DBIx::Class::Stats::Profiler;
 
 our @EXPORT = qw( with_stats );
 
 =head1 NAME
 
-Test::DBIx::Class::Calls - test statistics about your DBIx::Class calls
+Test::DBIx::Class::Stats - test statistics about your DBIx::Class calls
 
 =head1 SYNOPSIS
 
-Run a subtest with a debugging object (L<Test::DBIx::Class::Profiler>) set to capture
+Run a subtest with a debugging object (L<Test::DBIx::Class::Stats::Profiler>) set to capture
 the number of calls that have been made to the database. This may be useful to
 check your assumptions about prefetching, etc.
 
     use Test::More;
-    use Test::DBIx::Class::Calls;
+    use Test::DBIx::Class::Stats;
 
     # if you are using Test::DBIx::Class or similar, we can get the 
     # database handle from the `Schema` method
@@ -44,8 +44,8 @@ check your assumptions about prefetching, etc.
 
 =item C<with_stats $name, [$db], $code>
 
-The L<Test::DBIx::Class::Profiler> object is created for the database and is passed to
-your code reference as its first and only argument.
+The L<Test::DBIx::Class::Stats::Profiler> object is created for the database
+and is passed to your code reference as its first and only argument.
 
 If C<$db> is not passed, the caller's C<Schema> function will be called.  This
 is designed to work with L<Test::DBIx::Class>.
@@ -65,7 +65,7 @@ sub with_stats {
         debug    => $storage->debug,
         debugobj => $storage->debugobj,
     );
-    my $stats = Test::DBIx::Class::Profiler->new();
+    my $stats = Test::DBIx::Class::Stats::Profiler->new();
     $storage->debug(1);
     $storage->debugobj( $stats );
 

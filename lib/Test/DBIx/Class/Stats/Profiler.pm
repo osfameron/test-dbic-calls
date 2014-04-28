@@ -1,4 +1,4 @@
-package Test::DBIx::Class::Profiler;
+package Test::DBIx::Class::Stats::Profiler;
 use Moo;
 use MooX::HandlesVia;
 use Time::HiRes;

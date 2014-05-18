@@ -2,6 +2,7 @@ package Test::DBIx::Class::Stats;
 use parent 'Test::Builder::Module';
 use Test::DBIx::Class::Stats::Profiler;
 
+our $VERSION = 0.01;
 our @EXPORT = qw( with_stats );
 
 =head1 NAME
@@ -79,7 +80,7 @@ sub with_stats {
 # if https://github.com/Test-More/test-more/pull/395 is accepted
 # this routine can be deleted, and `with_stats` can just call
 # Test::Builder->new->subtest( "With stats: $name", $subtest, $stats );
-#
+# (PR accepted, but 1.001003 not yet released)
 sub subtest_with {
     my ($name, $subtest, @args) = @_;
     my $tb = __PACKAGE__->builder;

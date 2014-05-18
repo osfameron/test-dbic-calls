@@ -1,0 +1,4 @@
+#!/bin/bash
+cd `dirname $0`/..
+perldoc -u lib/Test/DBIx/Class/Stats.pm > README.pod
+perldoc -t lib/Test/DBIx/Class/Stats.pm > README

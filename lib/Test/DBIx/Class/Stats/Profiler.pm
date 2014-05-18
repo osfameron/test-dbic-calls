@@ -3,6 +3,8 @@ use Moo;
 use MooX::HandlesVia;
 use Time::HiRes;
 
+our $VERSION = 0.01;
+
 =head1 NAME
 
 Test::DBIC::Profiler - a simple DBIC profiler

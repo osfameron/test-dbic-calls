@@ -70,51 +70,11 @@ sub with_stats {
     $storage->debug(1);
     $storage->debugobj( $stats );
 
-    subtest_with( "With stats: $name", $subtest, $stats );
+    my $tb = __PACKAGE__->builder;
+    $tb->subtest( "With stats: $name", $subtest, $stats );
 
     $storage->debug( $old{debug} );
     $storage->debugobj( $old{debugobj} );
-}
-
-# this is cargo-culted from TB->subtest.
-# if https://github.com/Test-More/test-more/pull/395 is accepted
-# this routine can be deleted, and `with_stats` can just call
-# Test::Builder->new->subtest( "With stats: $name", $subtest, $stats );
-# (PR accepted, but 1.001003 not yet released)
-sub subtest_with {
-    my ($name, $subtest, @args) = @_;
-    my $tb = __PACKAGE__->builder;
-
-
-    my $error;
-    my $child;
-    my $parent = {};
-    {
-        local $Test::Builder::Level = $Test::Builder::Level + 1;
-        $child = $tb->child($name);
-        Test::Builder::_copy( $tb, $parent );
-        Test::Builder::_copy( $child, $tb );
-
-        my $run_with = sub {
-            $tb->note($name);
-            $subtest->(@args);
-            $tb->done_testing unless $tb->_plan_handled;
-            1;
-        };
-
-        eval { $run_with->() } or $error = $@;
-
-        Test::Builder::_copy( $tb, $child );
-        Test::Builder::_copy( $parent, $tb );
-        $tb->find_TODO(undef, 1, $child->{Parent_TODO});
-        die $error if $error and !eval { $error->isa('Test::Builder::Exception') };
-
-        local $Test::Builder::Level = $Test::Builder::Level + 1;
-        my $finalize = $child->finalize;
-
-        $tb->BAIL_OUT($child->{Bailed_Out_Reason}) if $child->{Bailed_Out};
-        return $finalize;
-    }
 }
 
 =head1 AUTHOR

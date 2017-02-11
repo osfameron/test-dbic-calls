@@ -35,5 +35,8 @@ cover_db
 # local::lib
 local/
 
+# author-only files
+bin/refresh-readme
+
 # skip releases
-Test-DBIx-Class-*
+Test-DBIx-Class-Stats-*

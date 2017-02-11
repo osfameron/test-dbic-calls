@@ -1,0 +1,6 @@
+Revision history for perl module Test::DBIx::Class::Stats
+
+    - fix failure with Test2 based Test::Builder (RT#113081)
+
+0.01 2014-05-18
+    - Initial release

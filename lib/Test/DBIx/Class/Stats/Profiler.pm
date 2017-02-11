@@ -76,7 +76,7 @@ sub query_end {
 
 =head1 AUTHOR
 
-osfameron <osfameron@cpan.org> 2014
+osfameron <osfameron@cpan.org> 2014-2017
 
 =cut
 

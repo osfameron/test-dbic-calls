@@ -18,6 +18,9 @@
 \bBuild$
 \b_build
 
+# Avoid MYMETA files
+^MYMETA\.
+
 # Avoid temp and backup files.
 ~$
 \.tmp$

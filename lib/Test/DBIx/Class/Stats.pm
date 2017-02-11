@@ -2,7 +2,7 @@ package Test::DBIx::Class::Stats;
 use parent 'Test::Builder::Module';
 use Test::DBIx::Class::Stats::Profiler;
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 our @EXPORT = qw( with_stats );
 
 =head1 NAME

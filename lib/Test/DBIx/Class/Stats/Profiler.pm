@@ -3,7 +3,7 @@ use Moo;
 use MooX::HandlesVia;
 use Time::HiRes;
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 =head1 NAME
 

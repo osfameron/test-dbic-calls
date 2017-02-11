@@ -77,6 +77,7 @@ sub query_end {
 =head1 AUTHOR
 
 osfameron <osfameron@cpan.org> 2014-2017
+
 Alexander Hartmaier <abraxxa@cpan.org> 2017
 
 =cut

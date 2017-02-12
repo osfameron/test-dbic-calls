@@ -7,11 +7,11 @@ our $VERSION = 0.02;
 
 =head1 NAME
 
-Test::DBIC::Profiler - a simple DBIC profiler
+Test::DBIx::Class::Stats::Profiler - a simple DBIC profiler
 
 =head1 SYNOPSIS
 
-See L<Test::DBIC::Calls> for how to use.
+See L<Test::DBIx::Class::Stats> for how to use.
 This class extends L<DBIx::Class::Storage::Statistics> and could
 alternatively be used as per that class.
 
